@@ -1,0 +1,106 @@
+body {
+    margin: 0;
+    font-family: system-ui;
+}
+
+.board {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, auto)
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+/* remove border for edges */
+.cell:nth-child(1), .cell:nth-child(2), .cell:nth-child(3) {
+    border-top: none;
+}
+
+.cell:nth-child(1), .cell:nth-child(4), .cell:nth-child(7) {
+    border-left: none;
+}
+
+.cell:nth-child(3), .cell:nth-child(6), .cell:nth-child(9) {
+    border-right: none;
+}
+
+.cell:nth-child(7), .cell:nth-child(8), .cell:nth-child(9) {
+    border-bottom: none;
+}
+
+.cell.x, .cell.o {
+    cursor: not-allowed;
+}
+
+/* for cross */
+.board.x .cell:not(.o):not(.x):hover {
+    background-size: 80% 80%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><text x="18" y="85" font-size="100" font-family="sans-serif" fill="lightgray">X</text></svg>') no-repeat center;
+}
+
+/* for cross (set) */
+.cell:not(.o).x {
+    background-size: 80% 80%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><text x="18" y="85" font-size="100" font-family="sans-serif" fill="red">X</text></svg>') no-repeat center;
+}
+
+/* for circle */
+.board.o .cell:not(.o):not(.x):hover {
+    background-size: 80% 80%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><text x="12" y="85" font-size="100" font-family="sans-serif" fill="lightgray">O</text></svg>') no-repeat center;
+}
+
+/* for circle (set) */
+.cell:not(.x).o {
+    background-size: 80% 80%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><text x="12" y="85" font-size="100" font-family="sans-serif" fill="orange">O</text></svg>') no-repeat center;
+}
+
+.winning-message {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #0275d8;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 5rem;
+    flex-direction: column;
+}
+
+.winning-message button {
+    border-radius: 10px;
+    font-size: 2rem;
+    background-color: white;
+    border: 1px solid #0275d8;
+    padding: 0.25em 0.5em;
+    cursor: pointer;
+    margin-top: 50px;
+}
+
+.winning-message button:hover {
+    background-color: #0275d8;
+    color: white;
+    border-color: white;
+}
+
+.winning-message.show {
+    display: flex;
+}
